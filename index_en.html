@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaime Barros - Industrial Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #E91E63;
+            --secondary-color: #2C3E50;
+            --background-color: #F8F9FA;
+            --text-primary: #2C3E50;
+            --text-secondary: #6C757D;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --border-color: #E0E0E0;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Dark Theme Variables */
+        [data-theme="dark"] {
+            --background-color: #1A1A1A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --white: #2D2D2D;
+            --light-gray: #333333;
+            --border-color: #404040;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background-color);
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: var(--light-gray);
+            color: var(--primary-color);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, var(--background-color) 0%, var(--light-gray) 100%);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-name {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-title {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .profile-photo {
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-photo img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Skills */
+        .skills-section {
+            margin-bottom: 3rem;
+        }
+
+        .skill-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .skill-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Software */
+        .software-section {
+            margin-bottom: 3rem;
+        }
+
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .software-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: var(--light-gray);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .software-item:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .software-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .software-item:hover i {
+            color: var(--white);
+        }
+
+        /* Languages */
+        .languages-section, .driving-license-section {
+            margin-bottom: 3rem;
+        }
+
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .language-item:last-child {
+            border-bottom: none;
+        }
+
+        .language-level {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Main Column */
+        .main-column {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .main-column .section-title {
+            margin-top: 3rem;
+        }
+
+        .main-column .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .profile-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        /* Education & Experience */
+        .education-item,
+        .experience-item,
+        .activity-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .education-item:last-child,
+        .experience-item:last-child,
+        .activity-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .education-title,
+        .experience-title,
+        .activity-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-institution,
+        .experience-company,
+        .activity-role {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .education-details,
+        .experience-details,
+        .activity-details {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .education-details li,
+        .experience-details li,
+        .activity-details li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .education-details li::before,
+        .experience-details li::before,
+        .activity-details li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .activity-description {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--light-gray);
+            padding: 4rem 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .contact-info-large {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item-large {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .contact-item-large:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-item-large i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            width: 60px;
+            text-align: center;
+        }
+
+        .contact-item-large h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item-large p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .contact-cta {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-cta h3 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-cta p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px; /* Adjust based on navbar height */
+                flex-direction: column;
+                background-color: var(--white);
+                width: 100%;
+                text-align: center;
+                transition: var(--transition);
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .nav-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-name {
+                font-size: 2.5rem;
+            }
+
+            .hero-title {
+                font-size: 1.2rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                position: static;
+                order: 2;
+            }
+
+            .main-column {
+                order: 1;
+            }
+
+            .software-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+            .hero {
+                padding: 100px 0 60px;
+            }
+            .hero-name {
+                font-size: 2rem;
+            }
+            .sidebar, .main-column {
+                padding: 1.5rem;
+            }
+            .profile-photo img {
+                width: 250px;
+                height: 250px;
+            }
+            .contact-item-large {
+                padding: 1rem;
+            }
+            .contact-item-large i {
+                font-size: 1.5rem;
+                width: 50px;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0 1rem; /* Adjust margin for spacing between items */
+            font-weight: 600;
+        }
+
+        .lang-switcher a {
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .lang-switcher a:hover {
+            color: var(--primary-color);
+        }
+
+        .lang-switcher .lang-active {
+            color: var(--primary-color);
+        }
+
+        .lang-switcher .lang-inactive {
+            color: var(--text-secondary);
+        }
+
+        /* Adjustments for nav-container flex order */
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo {
+            margin-right: auto; /* Push everything else to the right */
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                justify-content: space-between;
+            }
+            .nav-logo {
+                margin-right: 0;
+            }
+            .lang-switcher {
+                order: 1; /* Order for mobile: switcher */
+                margin: 0;
+            }
+            .theme-toggle {
+                order: 2; /* Order for mobile: theme toggle */
+                margin-left: 1rem;
+            }
+            .nav-toggle {
+                order: 3; /* Order for mobile: hamburger */
+                margin-left: 1rem;
+            }
+            .nav-menu {
+              top: 74px; /* Adjust based on your navbar height */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-name">Jaime Barros</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">Profile</a></li>
+                <li class="nav-item"><a href="#experience" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <a href="index.html" class="lang-inactive">PT</a>
+                <span>|</span>
+                <span class="lang-active">EN</span>
+            </div>
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-name">JAIME<br>BARROS</h1>
+                    <p class="hero-title">INDUSTRIAL ENGINEER</p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">Contact Me</a>
+                        <a href="Jaime_Barros_CV_EN.pdf" class="btn btn-secondary" download>
+                            <i class="fas fa-download"></i> Download CV
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-photo">
+                        <img src="profile.jpg" alt="Jaime Barros" id="profile-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="content-grid">
+                <aside class="sidebar">
+                    <section class="contact-info">
+                        <h2 class="section-title">CONTACT INFORMATION</h2>
+                        <div class="contact-item"><i class="fas fa-phone"></i><span>(+351) 926 272 506</span></div>
+                        <div class="contact-item"><i class="fas fa-envelope"></i><span>jaimebarrostr@gmail.com</span></div>
+                        <div class="contact-item"><i class="fab fa-linkedin"></i><span>@jaime-barros-w</span></div>
+                    </section>
+                    <section class="skills-section" id="skills">
+                        <h2 class="section-title">SKILLS AND SOFT SKILLS</h2>
+                        <div class="skills-list">
+                            <div class="skill-item"><span>Industrial process management and optimization</span></div>
+                            <div class="skill-item"><span>Production planning and control</span></div>
+                            <div class="skill-item"><span>Implementation of Lean methodologies (Kaizen, 5S)</span></div>
+                            <div class="skill-item"><span>Utilization of ERP systems and integrated management tools</span></div>
+                            <div class="skill-item"><span>Statistical analysis and data interpretation</span></div>
+                            <div class="skill-item"><span>Intermediate-advanced proficiency in Microsoft Excel</span></div>
+                            <div class="skill-item"><span>Basic knowledge in Python programming</span></div>
+                            <div class="skill-item"><span>Critical thinking and analytical capabilities</span></div>
+                            <div class="skill-item"><span>Excellent interpersonal communication and teamwork</span></div>
+                            <div class="skill-item"><span>Efficient organization, planning, and task management</span></div>
+                            <div class="skill-item"><span>Proactivity, autonomy, and adaptability to dynamic contexts</span></div>
+                            <div class="skill-item"><span>Results-oriented with practical problem-solving approach</span></div>
+                        </div>
+                    </section>
+                    <section class="software-section">
+                        <h2 class="section-title">SOFTWARE</h2>
+                        <div class="software-grid">
+                            <div class="software-item"><i class="fas fa-code"></i><span>C#/C++</span></div>
+                            <div class="software-item"><i class="fab fa-python"></i><span>Python</span></div>
+                            <div class="software-item"><i class="fas fa-chart-bar"></i><span>Power BI</span></div>
+                            <div class="software-item"><i class="fas fa-file-excel"></i><span>Microsoft Office</span></div>
+                            <div class="software-item"><i class="fas fa-drafting-compass"></i><span>AutoCAD</span></div>
+                            <div class="software-item"><i class="fas fa-database"></i><span>Microsoft SQL</span></div>
+                            <div class="software-item"><i class="fas fa-cube"></i><span>Fusion360</span></div>
+                            <div class="software-item"><i class="fas fa-calculator"></i><span>Matlab e Simulink</span></div>
+                            <div class="software-item"><i class="fas fa-cogs"></i><span>Flexsim</span></div>
+                            <div class="software-item"><i class="fas fa-chart-line"></i><span>Minitab</span></div>
+                        </div>
+                    </section>
+                    <section class="languages-section">
+                        <h2 class="section-title">LANGUAGES</h2>
+                        <div class="language-item"><span class="language-name">Portuguese</span><span class="language-level">Native</span></div>
+                        <div class="language-item"><span class="language-name">English</span><span class="language-level">Fluent</span></div>
+                    </section>
+                    <section class="driving-license-section">
+                        <h2 class="section-title">DRIVING LICENSE</h2>
+                        <div class="contact-item"><i class="fas fa-car"></i><span>Category B, B1</span></div>
+                    </section>
+                </aside>
+                <main class="main-column">
+                    <section class="profile-section" id="about">
+                        <h2 class="section-title">PERSONAL PROFILE</h2>
+                        <p class="profile-text">Recent graduate in Industrial Engineering and Management with strong academic training oriented towards productive processes and operations management. Motivated by challenges, with a solid ability for critical analysis and problem-solving. I seek to further develop technical and managerial competencies within dynamic contexts, contributing to operational efficiency and continuous organizational improvement.</p>
+                    </section>
+                    <section class="education-section" id="experience">
+                        <h2 class="section-title">ACADEMIC BACKGROUND</h2>
+                        <div class="education-item">
+                            <h3 class="education-title">Degree in Industrial Engineering and Management</h3>
+                            <p class="education-institution">University of Trás-os-Montes and Alto Douro</p>
+                            <ul class="education-details">
+                                <li>Development and implementation of practical projects optimizing production processes using Lean methodologies and management tools.</li>
+                                <li>Conducted statistical studies and data analysis aimed at continuous improvement in industrial and logistical processes.</li>
+                                <li>Active participation in multidisciplinary academic projects, demonstrating teamwork, organizational skills, and effective communication.</li>
+                            </ul>
+                        </div>
+                    </section>
+                    <section class="experience-section">
+                        <h2 class="section-title">PROFESSIONAL EXPERIENCE</h2>
+                        <div class="experience-item">
+                            <h3 class="experience-title">Internship in Industrial Engineering and Management</h3>
+                            <p class="experience-company">Carvalho e Mota</p>
+                            <ul class="experience-details">
+                                <li>Collaborated in analyzing and optimizing industrial processes to reduce costs and enhance productivity.</li>
+                                <li>Supported the implementation and monitoring of ERP systems for integrated production management.</li>
+                                <li>Participated in the preparation and presentation of technical reports and statistical analyses that informed strategic company decisions.</li>
+                            </ul>
+                        </div>
+                    </section>
+                    <section class="activities-section">
+                        <h2 class="section-title">EXTRACURRICULAR ACTIVITIES</h2>
+                        <div class="activity-item">
+                            <h3 class="activity-title">Industrial Engineering and Management Student Association</h3>
+                            <p class="activity-role">Board Member</p>
+                            <ul class="activity-details">
+                                <li>Coordinated academic events and workshops related to industrial engineering, promoting student engagement.</li>
+                                <li>Led teams in organizing and conducting technical debates, encouraging idea exchange and critical thinking.</li>
+                                <li>Actively collaborated in strategic planning and management of association activities, strengthening leadership and communication skills.</li>
+                            </ul>
+                        </div>
+                        <div class="activity-item"><h3 class="activity-title">Volunteer Work</h3><p class="activity-description">Participated in the "Vigilantes da Natureza" program within the "Voluntariado Jovem para a Natureza e Florestas," at the Parish Council of S. Martinho de Antas.</p></div>
+                        <div class="activity-item"><h3 class="activity-title">UTAD Summit</h3><p class="activity-role">Organization Member</p></div>
+                        <div class="activity-item"><h3 class="activity-title">EGI Talks</h3><p class="activity-role">Organization Member</p></div>
+                        <div class="activity-item"><h3 class="activity-title">Technical support technician during the 2024 European elections</h3></div>
+                        <div class="activity-item"><h3 class="activity-title">Mini-Mercado Barros</h3><p class="activity-role">Stock replenisher</p></div>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </main>
+
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">CONTACT</h2>
+            <div class="contact-grid">
+                <div class="contact-info-large">
+                    <div class="contact-item-large"><i class="fas fa-phone"></i><div><h3>Phone</h3><p>(+351) 926 272 506</p></div></div>
+                    <div class="contact-item-large"><i class="fas fa-envelope"></i><div><h3>Email</h3><p>jaimebarrostr@gmail.com</p></div></div>
+                    <div class="contact-item-large"><i class="fab fa-linkedin"></i><div><h3>LinkedIn</h3><p>@jaime-barros-w</p></div></div>
+                </div>
+                <div class="contact-cta">
+                    <h3>Let's work together?</h3>
+                    <p>I am always interested in new challenges and opportunities in the field of industrial engineering.</p>
+                    <a href="mailto:jaimebarrostr@gmail.com" class="btn btn-primary">Send Message</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer"><div class="container"><p>&copy; 2025 Jaime Barros - Industrial Engineer</p></div></footer>
+    <script>
+        // DOM Elements
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const themeToggle = document.getElementById('theme-toggle');
+        const navbar = document.getElementById('navbar');
+
+        // Mobile Navigation Toggle
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+
+        // Theme Toggle Functionality
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Navbar Scroll Effect
+        function handleNavbarScroll() {
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                if (document.documentElement.getAttribute('data-theme') === 'dark') {
+                    navbar.style.background = 'rgba(45, 45, 45, 0.95)';
+                }
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = 'var(--white)';
+                navbar.style.backdropFilter = 'none';
+            }
+        }
+
+        window.addEventListener('scroll', handleNavbarScroll);
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Active Navigation Link Highlighting
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section[id], header[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNavLink);
+
+        // Initialize all functionality when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+        });
+    </script>
+</body>
+</html>
