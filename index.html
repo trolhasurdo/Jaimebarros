@@ -539,6 +539,45 @@
             padding: 2rem 0;
         }
 
+        /* Color Picker */
+        .color-picker-wrapper {
+            position: relative;
+            margin: 0 1rem;
+        }
+
+        #color-picker-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        #color-picker-toggle:hover {
+             background: var(--light-gray);
+             color: var(--primary-color);
+        }
+
+        #color-picker-wheel {
+            position: absolute;
+            top: 120%;
+            right: 0;
+            z-index: 1001;
+            padding: 10px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            display: none; /* Initially hidden */
+        }
+
+        #color-picker-wheel.show {
+            display: block;
+        }
+
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-menu {
@@ -581,7 +620,11 @@
             }
 
             .hero-name {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+
+            .logo-name {
+                font-size: 1.3rem;
             }
 
             .hero-title {
@@ -631,6 +674,9 @@
             }
             .hero-name {
                 font-size: 2rem;
+            }
+            .logo-name {
+                font-size: 1.2rem;
             }
             .sidebar, .main-column {
                 padding: 1.5rem;
@@ -697,20 +743,31 @@
                 margin-right: 0;
             }
             .lang-switcher {
-                order: 1; /* Order for mobile: switcher */
+                order: 1;
+                margin: 0;
+            }
+            .color-picker-wrapper {
+                order: 2;
                 margin: 0;
             }
             .theme-toggle {
-                order: 2; /* Order for mobile: theme toggle */
+                order: 3;
                 margin-left: 1rem;
             }
             .nav-toggle {
-                order: 3; /* Order for mobile: hamburger */
+                order: 4;
                 margin-left: 1rem;
             }
             .nav-menu {
               top: 74px; /* Adjust based on your navbar height */
             }
+        }
+
+        @media (min-width: 769px) {
+             .nav-container-right-items {
+                display: flex;
+                align-items: center;
+             }
         }
     </style>
 </head>
@@ -727,14 +784,22 @@
                 <li class="nav-item"><a href="#skills" class="nav-link">Competências</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contacto</a></li>
             </ul>
-            <div class="lang-switcher">
-                <span class="lang-active">PT</span>
-                <span>|</span>
-                <a href="index_en.html" class="lang-inactive">EN</a>
+            <div class="nav-container-right-items">
+                <div class="color-picker-wrapper">
+                    <button id="color-picker-toggle" aria-label="Escolher cor do tema">
+                        <i class="fas fa-palette"></i>
+                    </button>
+                    <div id="color-picker-wheel"></div>
+                </div>
+                <div class="lang-switcher">
+                    <span class="lang-active">PT</span>
+                    <span>|</span>
+                    <a href="index_en.html" class="lang-inactive">EN</a>
+                </div>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
-            <button class="theme-toggle" id="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
             <div class="nav-toggle" id="nav-toggle">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -887,12 +952,16 @@
     </section>
 
     <footer class="footer"><div class="container"><p>&copy; 2025 Jaime Barros - Industrial Engineer</p></div></footer>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
     <script>
         // DOM Elements
         const navToggle = document.getElementById('nav-toggle');
         const navMenu = document.getElementById('nav-menu');
         const themeToggle = document.getElementById('theme-toggle');
         const navbar = document.getElementById('navbar');
+        const colorPickerToggle = document.getElementById('color-picker-toggle');
+        const colorPickerWheelContainer = document.getElementById('color-picker-wheel');
+        let colorPicker;
 
         // Mobile Navigation Toggle
         navToggle.addEventListener('click', () => {
@@ -934,6 +1003,39 @@
         }
 
         themeToggle.addEventListener('click', toggleTheme);
+
+        // Color Picker Functionality
+        function initColor() {
+            const savedColor = localStorage.getItem('primaryColor') || '#E91E63';
+
+            colorPicker = new iro.ColorPicker(colorPickerWheelContainer, {
+                width: 180,
+                color: savedColor,
+                borderWidth: 1,
+                borderColor: "#fff",
+            });
+
+            document.documentElement.style.setProperty('--primary-color', savedColor);
+
+            colorPicker.on('color:change', function(color) {
+                document.documentElement.style.setProperty('--primary-color', color.hexString);
+            });
+
+            colorPicker.on('input:end', function(color) {
+                localStorage.setItem('primaryColor', color.hexString);
+            });
+        }
+
+        colorPickerToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            colorPickerWheelContainer.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!colorPickerWheelContainer.contains(e.target) && e.target !== colorPickerToggle && !colorPickerToggle.contains(e.target)) {
+                colorPickerWheelContainer.classList.remove('show');
+            }
+        });
 
         // Navbar Scroll Effect
         function handleNavbarScroll() {
@@ -997,6 +1099,7 @@
         // Initialize all functionality when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();
+            initColor();
         });
     </script>
 </body>
