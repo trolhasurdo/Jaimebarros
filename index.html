@@ -39,6 +39,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
@@ -457,6 +461,99 @@
             font-style: italic;
         }
 
+        /* Quiz Section */
+        .quiz-section {
+            padding: 4rem 0;
+            background: var(--light-gray);
+        }
+
+        .quiz-container {
+            position: relative;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quiz-container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        #question-text {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            min-height: 60px;
+            color: var(--text-secondary);
+        }
+
+        .answer-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .answer-btn {
+            background: var(--light-gray);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+        }
+
+        .answer-btn:hover:not([disabled]) {
+            background: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        .answer-btn.correct {
+            background-color: #28a745;
+            color: white;
+            border-color: #28a745;
+            animation: pulse 0.5s;
+        }
+
+        .answer-btn.incorrect {
+            background-color: #dc3545;
+            color: white;
+            border-color: #dc3545;
+            animation: shake 0.5s;
+        }
+
+        .answer-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: center;
+        }
+
+        #next-btn {
+            display: none; /* Hidden by default */
+        }
+
+        #quiz-result {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        #quiz-result p {
+            margin-bottom: 1.5rem;
+        }
+
         /* Contact Section */
         .contact-section {
             background: var(--light-gray);
@@ -577,13 +674,72 @@
             display: block;
         }
 
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0 1rem; /* Adjust margin for spacing between items */
+            font-weight: 600;
+        }
+
+        .lang-switcher a {
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .lang-switcher a:hover {
+            color: var(--primary-color);
+        }
+
+        .lang-switcher .lang-active {
+            color: var(--primary-color);
+        }
+
+        .lang-switcher .lang-inactive {
+            color: var(--text-secondary);
+        }
+
+        /* Adjustments for nav-container flex order */
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo {
+            margin-right: auto; /* Push everything else to the right */
+        }
+
+        @media (min-width: 769px) {
+             .nav-container-right-items {
+                display: flex;
+                align-items: center;
+             }
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-container {
+                padding: 0.5rem 2rem;
+                justify-content: space-between;
+            }
+
             .nav-menu {
                 position: fixed;
                 left: -100%;
-                top: 70px; /* Adjust based on navbar height */
+                top: 60px; /* Adjust based on navbar height */
                 flex-direction: column;
                 background-color: var(--white);
                 width: 100%;
@@ -611,6 +767,10 @@
 
             .nav-toggle.active .bar:nth-child(3) {
                 transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero {
+                padding-top: 80px;
             }
 
             .hero-content {
@@ -660,6 +820,26 @@
                 padding: 0.75rem 1.5rem;
                 font-size: 0.9rem;
             }
+
+            .nav-logo {
+                margin-right: 0;
+            }
+            .lang-switcher {
+                order: 1;
+                margin: 0;
+            }
+            .color-picker-wrapper {
+                order: 2;
+                margin: 0;
+            }
+            .theme-toggle {
+                order: 3;
+                margin-left: 1rem;
+            }
+            .nav-toggle {
+                order: 4;
+                margin-left: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -667,10 +847,11 @@
                 padding: 0 15px;
             }
             .nav-container {
-                padding: 1rem 1.5rem;
+                padding: 0.5rem 1.5rem;
             }
             .hero {
-                padding: 100px 0 60px;
+                padding-top: 80px;
+                padding-bottom: 60px;
             }
             .hero-name {
                 font-size: 2rem;
@@ -692,82 +873,12 @@
                 font-size: 1.5rem;
                 width: 50px;
             }
-        }
-
-        /* Smooth Scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Language Switcher */
-        .lang-switcher {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 0 1rem; /* Adjust margin for spacing between items */
-            font-weight: 600;
-        }
-
-        .lang-switcher a {
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .lang-switcher a:hover {
-            color: var(--primary-color);
-        }
-
-        .lang-switcher .lang-active {
-            color: var(--primary-color);
-        }
-
-        .lang-switcher .lang-inactive {
-            color: var(--text-secondary);
-        }
-
-        /* Adjustments for nav-container flex order */
-        .nav-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-logo {
-            margin-right: auto; /* Push everything else to the right */
-        }
-
-        @media (max-width: 768px) {
-            .nav-container {
-                justify-content: space-between;
+            .answer-buttons {
+                grid-template-columns: 1fr;
             }
-            .nav-logo {
-                margin-right: 0;
+            .quiz-container {
+                padding: 1.5rem;
             }
-            .lang-switcher {
-                order: 1;
-                margin: 0;
-            }
-            .color-picker-wrapper {
-                order: 2;
-                margin: 0;
-            }
-            .theme-toggle {
-                order: 3;
-                margin-left: 1rem;
-            }
-            .nav-toggle {
-                order: 4;
-                margin-left: 1rem;
-            }
-            .nav-menu {
-              top: 74px; /* Adjust based on your navbar height */
-            }
-        }
-
-        @media (min-width: 769px) {
-             .nav-container-right-items {
-                display: flex;
-                align-items: center;
-             }
         }
     </style>
 </head>
@@ -777,14 +888,16 @@
             <div class="nav-logo">
                 <span class="logo-name">Jaime Barros</span>
             </div>
-            <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item"><a href="#home" class="nav-link">Início</a></li>
-                <li class="nav-item"><a href="#about" class="nav-link">Perfil</a></li>
-                <li class="nav-item"><a href="#experience" class="nav-link">Experiência</a></li>
-                <li class="nav-item"><a href="#skills" class="nav-link">Competências</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contacto</a></li>
-            </ul>
+
             <div class="nav-container-right-items">
+                 <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="#home" class="nav-link">Início</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">Perfil</a></li>
+                    <li class="nav-item"><a href="#experience" class="nav-link">Experiência</a></li>
+                    <li class="nav-item"><a href="#skills" class="nav-link">Competências</a></li>
+                    <li class="nav-item"><a href="#quiz" class="nav-link">Quiz</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contacto</a></li>
+                </ul>
                 <div class="color-picker-wrapper">
                     <button id="color-picker-toggle" aria-label="Escolher cor do tema">
                         <i class="fas fa-palette"></i>
@@ -823,7 +936,7 @@
                 </div>
                 <div class="hero-image">
                     <div class="profile-photo">
-                        <img src="profile.jpg" alt="Jaime Barros" id="profile-img">
+                        <img src="https://placehold.co/300x300/E91E63/FFFFFF?text=JB" alt="Jaime Barros" id="profile-img" onerror="this.onerror=null;this.src='https://placehold.co/300x300/CCCCCC/FFFFFF?text=Image+Not+Found';">
                     </div>
                 </div>
             </div>
@@ -933,6 +1046,27 @@
         </div>
     </main>
 
+    <section class="quiz-section" id="quiz">
+        <div class="container">
+             <div class="quiz-container">
+                <canvas id="confetti-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
+                <h2 class="section-title" style="text-align: center; margin-bottom: 2rem;">Teste os seus conhecimentos!</h2>
+                <div id="quiz-content">
+                    <p id="question-text">A carregar pergunta...</p>
+                    <div id="answer-buttons" class="answer-buttons">
+                        <!-- Botões de resposta serão gerados aqui -->
+                    </div>
+                    <div class="quiz-controls">
+                         <button id="next-btn" class="btn btn-primary">Próximo</button>
+                    </div>
+                </div>
+                 <div id="quiz-result" style="display: none;">
+                    <!-- O resultado final será mostrado aqui -->
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="contact-section" id="contact">
         <div class="container">
             <h2 class="section-title">CONTACTO</h2>
@@ -951,8 +1085,9 @@
         </div>
     </section>
 
-    <footer class="footer"><div class="container"><p>&copy; 2025 Jaime Barros - Industrial Engineer</p></div></footer>
+    <footer class="footer"><div class="container"><p>&copy; 2025 Jaime Barros - Engenheiro Industrial</p></div></footer>
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script>
         // DOM Elements
         const navToggle = document.getElementById('nav-toggle');
@@ -964,16 +1099,20 @@
         let colorPicker;
 
         // Mobile Navigation Toggle
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
-        });
+        if(navToggle) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+        }
 
         // Close mobile menu when clicking on a link
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
+                if(navMenu.classList.contains('active')){
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
             });
         });
 
@@ -1002,10 +1141,14 @@
             }
         }
 
-        themeToggle.addEventListener('click', toggleTheme);
+        if(themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
 
         // Color Picker Functionality
         function initColor() {
+            if (!colorPickerWheelContainer) return;
+
             const savedColor = localStorage.getItem('primaryColor') || '#E91E63';
 
             colorPicker = new iro.ColorPicker(colorPickerWheelContainer, {
@@ -1026,13 +1169,15 @@
             });
         }
 
-        colorPickerToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            colorPickerWheelContainer.classList.toggle('show');
-        });
+        if(colorPickerToggle) {
+            colorPickerToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                colorPickerWheelContainer.classList.toggle('show');
+            });
+        }
 
         document.addEventListener('click', (e) => {
-            if (!colorPickerWheelContainer.contains(e.target) && e.target !== colorPickerToggle && !colorPickerToggle.contains(e.target)) {
+            if (colorPickerWheelContainer && !colorPickerWheelContainer.contains(e.target) && e.target !== colorPickerToggle && !colorPickerToggle.contains(e.target)) {
                 colorPickerWheelContainer.classList.remove('show');
             }
         });
@@ -1040,9 +1185,10 @@
         // Navbar Scroll Effect
         function handleNavbarScroll() {
             if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
                 if (document.documentElement.getAttribute('data-theme') === 'dark') {
-                    navbar.style.background = 'rgba(45, 45, 45, 0.95)';
+                    navbar.style.background = 'rgba(45, 45, 45, 0.9)';
+                } else {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.9)';
                 }
                 navbar.style.backdropFilter = 'blur(10px)';
             } else {
@@ -1060,7 +1206,7 @@
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
                     if (target) {
-                        const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+                        const offsetTop = target.offsetTop - 70; // Account for fixed navbar
                         window.scrollTo({
                             top: offsetTop,
                             behavior: 'smooth'
@@ -1074,21 +1220,18 @@
         function updateActiveNavLink() {
             const sections = document.querySelectorAll('section[id], header[id]');
             const navLinks = document.querySelectorAll('.nav-link');
-
             let current = '';
 
             sections.forEach(section => {
                 const sectionTop = section.offsetTop - 100;
-                const sectionHeight = section.clientHeight;
-
-                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                if (window.scrollY >= sectionTop) {
                     current = section.getAttribute('id');
                 }
             });
 
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
+                if (link.getAttribute('href').includes(current)) {
                     link.classList.add('active');
                 }
             });
@@ -1096,10 +1239,247 @@
 
         window.addEventListener('scroll', updateActiveNavLink);
 
+        // --- QUIZ SCRIPT ---
+        const quizQuestions = [
+            {
+                question: "Qual é a minha formação académica?",
+                answers: [
+                    { text: "Engenharia Informática", correct: false },
+                    { text: "Engenharia e Gestão Industrial", correct: true },
+                    { text: "Gestão de Empresas", correct: false },
+                    { text: "Engenharia Mecânica", correct: false },
+                ]
+            },
+            {
+                question: "Em que universidade estudei?",
+                answers: [
+                    { text: "Universidade de Lisboa", correct: false },
+                    { text: "Universidade do Porto", correct: false },
+                    { text: "Universidade de Trás-os-Montes e Alto Douro", correct: true },
+                    { text: "Universidade de Coimbra", correct: false },
+                ]
+            },
+            {
+                question: "Qual metodologia Lean é mencionada nas minhas competências?",
+                answers: [
+                    { text: "Six Sigma", correct: false },
+                    { text: "Kaizen e 5S", correct: true },
+                    { text: "Scrum", correct: false },
+                    { text: "Kanban", correct: false },
+                ]
+            },
+            {
+                question: "Qual é o meu nível de proficiência em Inglês?",
+                answers: [
+                    { text: "Básico", correct: false },
+                    { text: "Intermédio", correct: false },
+                    { text: "Nativo", correct: false },
+                    { text: "Fluente", correct: true },
+                ]
+            },
+            {
+                question: "Em que empresa fiz o meu estágio profissional?",
+                answers: [
+                    { text: "Carvalho e Mota", correct: true },
+                    { text: "Barros & Filhos", correct: false },
+                    { text: "Indústria Nortenha", correct: false },
+                    { text: "Tecnologia do Douro", correct: false },
+                ]
+            },
+            {
+                question: "Tenho conhecimentos básicos em qual linguagem de programação?",
+                answers: [
+                    { text: "JavaScript", correct: false },
+                    { text: "Java", correct: false },
+                    { text: "Python", correct: true },
+                    { text: "C#", correct: false },
+                ]
+            },
+            {
+                question: "Fui membro da direção de qual associação de estudantes?",
+                answers: [
+                    { text: "Associação Académica da UTAD", correct: false },
+                    { text: "Associação de Estudantes de Engenharia e Gestão Industrial", correct: true },
+                    { text: "Núcleo de Estudantes de Engenharia Mecânica", correct: false },
+                    { text: "Conselho de Estudantes de Vila Real", correct: false },
+                ]
+            },
+            {
+                question: "Qual dos seguintes softwares de CAD/3D é mencionado?",
+                answers: [
+                    { text: "SolidWorks", correct: false },
+                    { text: "CATIA", correct: false },
+                    { text: "Blender", correct: false },
+                    { text: "Fusion360", correct: true },
+                ]
+            },
+            {
+                question: "Qual ferramenta da Microsoft para Business Intelligence eu conheço?",
+                answers: [
+                    { text: "Microsoft Access", correct: false },
+                    { text: "Power BI", correct: true },
+                    { text: "Microsoft Project", correct: false },
+                    { text: "Excel Avançado", correct: false },
+                ]
+            },
+            {
+                question: "Em que área procuro ativamente novas oportunidades?",
+                answers: [
+                    { text: "Marketing Digital", correct: false },
+                    { text: "Recursos Humanos", correct: false },
+                    { text: "Engenharia Industrial", correct: true },
+                    { text: "Design Gráfico", correct: false },
+                ]
+            }
+        ];
+
+        const questionTextElement = document.getElementById('question-text');
+        const answerButtonsElement = document.getElementById('answer-buttons');
+        const nextButton = document.getElementById('next-btn');
+        const quizResultElement = document.getElementById('quiz-result');
+        const quizContentElement = document.getElementById('quiz-content');
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizResultElement.style.display = 'none';
+            quizContentElement.style.display = 'block';
+            nextButton.style.display = 'none';
+            nextButton.innerHTML = "Próximo";
+            showQuestion();
+        }
+
+        function showQuestion() {
+            resetState();
+            let currentQuestion = quizQuestions[currentQuestionIndex];
+            let questionNo = currentQuestionIndex + 1;
+            questionTextElement.innerHTML = questionNo + ". " + currentQuestion.question;
+
+            currentQuestion.answers.forEach(answer => {
+                const button = document.createElement("button");
+                button.innerHTML = answer.text;
+                button.classList.add("answer-btn");
+                answerButtonsElement.appendChild(button);
+                if (answer.correct) {
+                    button.dataset.correct = answer.correct;
+                }
+                button.addEventListener("click", selectAnswer);
+            });
+        }
+
+        function resetState() {
+            nextButton.style.display = 'none';
+            while (answerButtonsElement.firstChild) {
+                answerButtonsElement.removeChild(answerButtonsElement.firstChild);
+            }
+        }
+
+        function selectAnswer(e) {
+            const selectedBtn = e.target;
+            const isCorrect = selectedBtn.dataset.correct === "true";
+            if (isCorrect) {
+                selectedBtn.classList.add("correct");
+                score++;
+            } else {
+                selectedBtn.classList.add("incorrect");
+            }
+            Array.from(answerButtonsElement.children).forEach(button => {
+                if (button.dataset.correct === "true") {
+                    button.classList.add("correct");
+                }
+                button.disabled = true;
+            });
+            nextButton.style.display = 'block';
+        }
+
+        function showScore() {
+            resetState();
+            quizContentElement.style.display = 'none';
+            quizResultElement.style.display = 'block';
+
+            const confettiCanvas = document.getElementById('confetti-canvas');
+            if (typeof confetti !== 'undefined' && confettiCanvas) {
+                const myConfetti = confetti.create(confettiCanvas, {
+                    resize: true,
+                    useWorker: true
+                });
+
+                const percentage = (score / quizQuestions.length) * 100;
+
+                if (percentage === 100) {
+                    // Fire confetti for perfect score!
+                    const duration = 3 * 1000;
+                    const animationEnd = Date.now() + duration;
+                    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10 };
+
+                    function randomInRange(min, max) {
+                        return Math.random() * (max - min) + min;
+                    }
+
+                    const interval = setInterval(function() {
+                        const timeLeft = animationEnd - Date.now();
+                        if (timeLeft <= 0) return clearInterval(interval);
+
+                        const particleCount = 50 * (timeLeft / duration);
+                        myConfetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                        myConfetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+                    }, 250);
+                } else if (percentage >= 70) {
+                    // A smaller celebration
+                    myConfetti({
+                        particleCount: 100,
+                        spread: 90,
+                        origin: { y: 0.6 },
+                        zIndex: 10
+                    });
+                }
+            }
+
+            let message = "";
+            const percentage = (score / quizQuestions.length) * 100;
+            if (percentage === 100) {
+                message = "Impressionante! Parece que leu tudo com atenção!";
+            } else if (percentage >= 70) {
+                message = "Excelente trabalho! Conhece-me bem.";
+            } else if (percentage >= 50) {
+                message = "Nada mau! Mas ainda há detalhes a descobrir.";
+            } else {
+                message = "Pode melhorar. Dê mais uma vista de olhos pelo site!";
+            }
+
+            quizResultElement.innerHTML = `
+                <p>Você acertou ${score} de ${quizQuestions.length} perguntas!</p>
+                <p>${message}</p>
+                <button class="btn btn-primary" onclick="startQuiz()">Tentar Novamente</button>
+            `;
+        }
+
+
+        function handleNextButton() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                showQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        nextButton.addEventListener("click", () => {
+            if (currentQuestionIndex < quizQuestions.length) {
+                handleNextButton();
+            } else {
+                startQuiz();
+            }
+        });
+
         // Initialize all functionality when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();
             initColor();
+            startQuiz();
         });
     </script>
 </body>
