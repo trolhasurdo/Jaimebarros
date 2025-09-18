@@ -269,6 +269,15 @@
             padding-bottom: 0.5rem;
         }
 
+        .section-title.centered {
+            text-align: center;
+        }
+
+        .section-title.centered::after {
+           left: 50%;
+           transform: translateX(-50%);
+        }
+
         .section-title::after {
             content: '';
             position: absolute;
@@ -380,12 +389,12 @@
             box-shadow: var(--shadow);
         }
 
-        .main-column .section-title {
-            margin-top: 3rem;
+        .main-column > section {
+            margin-bottom: 3rem;
         }
 
-        .main-column .section-title:first-child {
-            margin-top: 0;
+        .main-column > section:last-child {
+            margin-bottom: 0;
         }
 
         .profile-text {
@@ -464,7 +473,7 @@
         /* Quiz Section */
         .quiz-section {
             padding: 4rem 0;
-            background: var(--light-gray);
+            background: var(--background-color);
         }
 
         .quiz-container {
@@ -710,11 +719,9 @@
             margin-right: auto; /* Push everything else to the right */
         }
 
-        @media (min-width: 769px) {
-             .nav-container-right-items {
-                display: flex;
-                align-items: center;
-             }
+        .nav-container-right-items {
+            display: flex;
+            align-items: center;
         }
 
         /* Animations */
@@ -729,17 +736,41 @@
             50% { transform: scale(1.05); }
         }
 
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+                order: 2;
+            }
+             .main-column {
+                order: 1;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-container {
-                padding: 0.5rem 2rem;
+                padding: 0.5rem 1.5rem;
                 justify-content: space-between;
             }
 
             .nav-menu {
                 position: fixed;
                 left: -100%;
-                top: 60px; /* Adjust based on navbar height */
+                top: 58px; /* Adjust based on navbar height */
                 flex-direction: column;
                 background-color: var(--white);
                 width: 100%;
@@ -779,6 +810,10 @@
                 gap: 2rem;
             }
 
+            .hero-image {
+                order: -1;
+            }
+
             .hero-name {
                 font-size: 2.2rem;
             }
@@ -789,20 +824,6 @@
 
             .hero-title {
                 font-size: 1.2rem;
-            }
-
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .sidebar {
-                position: static;
-                order: 2;
-            }
-
-            .main-column {
-                order: 1;
             }
 
             .software-grid {
@@ -823,22 +844,6 @@
 
             .nav-logo {
                 margin-right: 0;
-            }
-            .lang-switcher {
-                order: 1;
-                margin: 0;
-            }
-            .color-picker-wrapper {
-                order: 2;
-                margin: 0;
-            }
-            .theme-toggle {
-                order: 3;
-                margin-left: 1rem;
-            }
-            .nav-toggle {
-                order: 4;
-                margin-left: 1rem;
             }
         }
 
@@ -1069,7 +1074,7 @@
 
     <section class="contact-section" id="contact">
         <div class="container">
-            <h2 class="section-title">CONTACTO</h2>
+            <h2 class="section-title centered">Contacto</h2>
             <div class="contact-grid">
                 <div class="contact-info-large">
                     <div class="contact-item-large"><i class="fas fa-phone"></i><div><h3>Telefone</h3><p>(+351) 926 272 506</p></div></div>
@@ -1343,6 +1348,7 @@
         let score = 0;
 
         function startQuiz() {
+            if (!quizContentElement) return;
             currentQuestionIndex = 0;
             score = 0;
             quizResultElement.style.display = 'none';
@@ -1467,19 +1473,39 @@
             }
         }
 
-        nextButton.addEventListener("click", () => {
-            if (currentQuestionIndex < quizQuestions.length) {
-                handleNextButton();
-            } else {
-                startQuiz();
-            }
-        });
+        if(nextButton) {
+            nextButton.addEventListener("click", () => {
+                if (currentQuestionIndex < quizQuestions.length) {
+                    handleNextButton();
+                } else {
+                    startQuiz();
+                }
+            });
+        }
+
+        function initScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.sidebar > section, .main-column > section, .contact-item-large, .quiz-container');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        }
 
         // Initialize all functionality when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();
             initColor();
             startQuiz();
+            initScrollAnimations();
         });
     </script>
 </body>
